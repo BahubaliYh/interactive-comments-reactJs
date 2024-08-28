@@ -1,0 +1,53 @@
+body {
+  margin: 0;
+  background-color: hsl(228, 33%, 97%);
+  font-family: "Rubik", sans-serif;
+}
+
+h4 {
+  margin: 0;
+  padding: 0;
+}
+
+.add-comment-section {
+  display: flex;
+}
+
+textarea {
+  resize: none;
+}
+
+.container {
+  margin: 130px 240px;
+}
+
+.comment {
+  background-color: #fff;
+  padding: 30px;
+  margin-bottom: 25px;
+  border-radius: 5px;
+  display: flex;
+  gap: 25px;
+  align-items: flex-start;
+}
+
+.comment-body {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.comment-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.comment-text,
+.comment-created {
+  color: hsl(211, 10%, 45%)
+}
+
+.comment-username {
+  color: hsl(238, 40%, 52%)
+}
