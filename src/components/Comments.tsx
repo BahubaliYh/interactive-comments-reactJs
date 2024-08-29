@@ -19,7 +19,7 @@ function Comments({ comment }: CommentsProps) {
           <p className="comment-text">{comment.content}</p>
         </div>
       </div>
-      <div style={{ paddingLeft: "100px" }}>
+      <div className="replies-container">
         {comment?.replies?.map((reply) => (
           <Reply reply={reply} key={reply.id} />
         ))}

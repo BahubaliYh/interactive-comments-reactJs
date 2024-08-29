@@ -6,10 +6,11 @@ function AddCommentComponent() {
       <div>
         <img src={juliusomoPng} alt="user profile picture" width="35px" />
       </div>
-      <div>
-        <textarea id="w3review" name="w3review" rows={4} cols={50}>
-          Add a comment
-        </textarea>
+      <div style={{ width: "100%" }}>
+        <textarea
+          className="add-comment-textbox"
+          placeholder="Add comment.."
+        ></textarea>
       </div>
       <div>
         <button className="send-btn">SEND</button>
