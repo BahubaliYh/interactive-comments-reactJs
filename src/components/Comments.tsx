@@ -1,9 +1,8 @@
-import { Comment } from "./model/data.interface"
-import Reply from "./Reply"
+import { Comment, Reply } from "./model/data.interface"
 import Score from "./Score"
 import juliusomoPng from "../assets/images/avatars/image-juliusomo.png"
 interface CommentsProps {
-  comment: Comment
+  comment: Comment | Reply
 }
 function Comments({ comment }: CommentsProps) {
   return (
@@ -21,7 +20,7 @@ function Comments({ comment }: CommentsProps) {
       </div>
       <div className="replies-container">
         {comment?.replies?.map((reply) => (
-          <Reply reply={reply} key={reply.id} />
+          <Comments comment={reply} key={reply.id} />
         ))}
       </div>
     </>

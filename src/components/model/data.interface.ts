@@ -18,6 +18,7 @@ export interface Reply {
   score: number;
   replyingTo: string;
   user: User;
+  replies: Reply[];
 }
 
 // Interface for a comment, which may include an array of replies
