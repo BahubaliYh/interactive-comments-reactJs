@@ -1,6 +1,6 @@
 import juliusomoPng from "../assets/images/avatars/image-juliusomo.png"
 
-function AddCommentComponent() {
+function AddCommentComponent({ comment, handleChange, handleSubmit }) {
   return (
     <div className="add-comment-section">
       <div>
@@ -8,12 +8,16 @@ function AddCommentComponent() {
       </div>
       <div style={{ width: "100%" }}>
         <textarea
+          value={comment}
+          onChange={handleChange}
           className="add-comment-textbox"
           placeholder="Add comment.."
         ></textarea>
       </div>
       <div>
-        <button className="send-btn">SEND</button>
+        <button className="send-btn" onClick={handleSubmit}>
+          SEND
+        </button>
       </div>
     </div>
   )
