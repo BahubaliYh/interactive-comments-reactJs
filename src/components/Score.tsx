@@ -1,8 +1,8 @@
 import React, { useState } from "react"
 import "./styles/Score.css" // Make sure to create this CSS file
 
-function Score() {
-  const [score, setScore] = useState(12) // Initial score set to 12
+function Score({ score }) {
+  const [votes, setScore] = useState(score) // Initial score set to 12
 
   const increaseScore = () => {
     setScore(score + 1)
@@ -17,7 +17,7 @@ function Score() {
       <button className="score-button" onClick={increaseScore}>
         +
       </button>
-      <div className="score-value">{score}</div>
+      <div className="score-value">{votes}</div>
       <button className="score-button" onClick={decreaseScore}>
         -
       </button>
