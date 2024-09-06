@@ -9,7 +9,11 @@ function App() {
   const { comments } = DATA
   const [comment, setComment] = useState("")
   console.log("comments", comments)
-  const { comments: commentsData, insertComment } = useCommentTree(comments)
+  const {
+    comments: commentsData,
+    insertComment,
+    editComment,
+  } = useCommentTree(comments)
   console.log("commentsData", commentsData)
 
   const handleChange = (e) => {
@@ -19,6 +23,10 @@ function App() {
 
   const handleReply = (commentId, content) => {
     insertComment(commentId, content)
+  }
+
+  const handleEdit = (commentId, content) => {
+    editComment(commentId, content)
   }
 
   const handleSubmit = () => {
@@ -35,12 +43,14 @@ function App() {
           key={comment.id}
           onSubmitComment={handleReply}
           handleChange={handleChange}
+          onEditComment={handleEdit}
         />
       ))}
       <AddCommentComponent
         comment={comment}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
+        buttonText={"SEND"}
       />
     </div>
   )
