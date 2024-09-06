@@ -1,11 +1,22 @@
 import juliusomoPng from "../assets/images/avatars/image-juliusomo.png"
 
-function AddCommentComponent({ comment, handleChange, handleSubmit }) {
+function AddCommentComponent({
+  comment,
+  handleChange,
+  handleSubmit,
+  buttonText,
+  isUpdateTextArea = false,
+}) {
   return (
     <div className="add-comment-section">
-      <div>
-        <img src={juliusomoPng} alt="user profile picture" width="35px" />
-      </div>
+      {isUpdateTextArea ? (
+        ""
+      ) : (
+        <div>
+          <img src={juliusomoPng} alt="user profile picture" width="35px" />
+        </div>
+      )}
+
       <div style={{ width: "100%" }}>
         <textarea
           value={comment}
@@ -16,7 +27,7 @@ function AddCommentComponent({ comment, handleChange, handleSubmit }) {
       </div>
       <div>
         <button className="send-btn" onClick={handleSubmit}>
-          SEND
+          {buttonText}
         </button>
       </div>
     </div>

@@ -10,15 +10,25 @@ interface CommentsProps {
   comment: Comment | Reply
   onSubmitComment: (id: string | number, content: string) => void
 }
-function Comments({ comment, onSubmitComment }: CommentsProps) {
+function Comments({ comment, onSubmitComment, onEditComment }: CommentsProps) {
   const [expand, setExpand] = useState(false)
+  const [expandEdit, setExpandEdit] = useState(false)
   const [replyContent, setReplyContent] = useState("")
+  const [editContent, setEditContent] = useState(comment.content)
   const toggleExpand = () => {
     setExpand(!expand)
   }
+  const toggleEditExpand = () => {
+    setExpandEdit(!expandEdit)
+    setEditContent(comment.content)
+  }
 
   const handleChange = (e: { target: { value: SetStateAction<string> } }) => {
-    setReplyContent(e.target.value)
+    if (expandEdit) {
+      setEditContent(e.target.value)
+    } else {
+      setReplyContent(e.target.value)
+    }
   }
 
   const handleReplySubmit = () => {
@@ -28,6 +38,11 @@ function Comments({ comment, onSubmitComment }: CommentsProps) {
       setReplyContent("")
     }
     toggleExpand()
+  }
+
+  const handleEditSubmit = () => {
+    onEditComment(comment.id, editContent)
+    setExpandEdit(false)
   }
   return (
     <>
@@ -53,7 +68,7 @@ function Comments({ comment, onSubmitComment }: CommentsProps) {
                 </i>
                 Delete
               </button>
-              <button className="edit-btn">
+              <button className="edit-btn" onClick={toggleEditExpand}>
                 <i>
                   <img src={editIcon} alt="" />
                 </i>
@@ -61,7 +76,17 @@ function Comments({ comment, onSubmitComment }: CommentsProps) {
               </button>
             </div>
           </div>
-          <p className="comment-text">{comment.content}</p>
+          {expandEdit ? (
+            <AddCommentComponent
+              comment={editContent}
+              handleChange={handleChange}
+              handleSubmit={handleEditSubmit}
+              buttonText={"UPDATE"}
+              isUpdateTextArea={true}
+            />
+          ) : (
+            <p className="comment-text">{comment.content}</p>
+          )}
         </div>
       </div>
       {expand && (
@@ -69,6 +94,7 @@ function Comments({ comment, onSubmitComment }: CommentsProps) {
           comment={replyContent}
           handleChange={handleChange}
           handleSubmit={handleReplySubmit}
+          buttonText={"REPLY"}
         />
       )}
       <div className="replies-container">
@@ -77,6 +103,7 @@ function Comments({ comment, onSubmitComment }: CommentsProps) {
             comment={reply}
             key={reply.id}
             onSubmitComment={onSubmitComment}
+            onEditComment={onEditComment}
           />
         ))}
       </div>
