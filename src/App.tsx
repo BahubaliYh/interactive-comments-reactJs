@@ -8,11 +8,12 @@ import { DATA } from "./data"
 function App() {
   const { comments } = DATA
   const [comment, setComment] = useState("")
-  console.log("comments", comments)
+  console.log("comments in app tsx file", comments)
   const {
     comments: commentsData,
     insertComment,
     editComment,
+    deleteComment,
   } = useCommentTree(comments)
   console.log("commentsData", commentsData)
 
@@ -27,6 +28,10 @@ function App() {
 
   const handleEdit = (commentId, content) => {
     editComment(commentId, content)
+  }
+
+  const handleDelete = (commentId) => {
+    deleteComment(commentId)
   }
 
   const handleSubmit = () => {
@@ -44,6 +49,7 @@ function App() {
           onSubmitComment={handleReply}
           handleChange={handleChange}
           onEditComment={handleEdit}
+          onDeleteComment={handleDelete}
         />
       ))}
       <AddCommentComponent

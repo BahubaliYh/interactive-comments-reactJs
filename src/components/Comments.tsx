@@ -6,13 +6,20 @@ import editIcon from "../assets/images/icon-edit.svg"
 import deleteIcon from "../assets/images/icon-delete.svg"
 import { SetStateAction, useState } from "react"
 import AddCommentComponent from "./AddCommentComponent"
+import Modal from "./Modal"
 interface CommentsProps {
   comment: Comment | Reply
   onSubmitComment: (id: string | number, content: string) => void
 }
-function Comments({ comment, onSubmitComment, onEditComment }: CommentsProps) {
+function Comments({
+  comment,
+  onSubmitComment = () => {},
+  onEditComment = () => {},
+  onDeleteComment = () => {},
+}: CommentsProps) {
   const [expand, setExpand] = useState(false)
   const [expandEdit, setExpandEdit] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const [replyContent, setReplyContent] = useState("")
   const [editContent, setEditContent] = useState(comment.content)
   const toggleExpand = () => {
@@ -44,6 +51,14 @@ function Comments({ comment, onSubmitComment, onEditComment }: CommentsProps) {
     onEditComment(comment.id, editContent)
     setExpandEdit(false)
   }
+
+  const openModal = () => {
+    setIsModalOpen(true)
+  }
+
+  const closeModal = () => {
+    setIsModalOpen(false)
+  }
   return (
     <>
       <div className="comment">
@@ -62,7 +77,11 @@ function Comments({ comment, onSubmitComment, onEditComment }: CommentsProps) {
                 </i>
                 Reply
               </button>
-              <button className="delete-btn">
+              <button
+                className="delete-btn"
+                // onClick={() => onDeleteComment(comment.id)}
+                onClick={openModal}
+              >
                 <i>
                   <img src={deleteIcon} alt="" />
                 </i>
@@ -82,7 +101,7 @@ function Comments({ comment, onSubmitComment, onEditComment }: CommentsProps) {
               handleChange={handleChange}
               handleSubmit={handleEditSubmit}
               buttonText={"UPDATE"}
-              isUpdateTextArea={true}
+              isUpdateTextArea={expandEdit}
             />
           ) : (
             <p className="comment-text">{comment.content}</p>
@@ -104,9 +123,20 @@ function Comments({ comment, onSubmitComment, onEditComment }: CommentsProps) {
             key={reply.id}
             onSubmitComment={onSubmitComment}
             onEditComment={onEditComment}
+            onDeleteComment={onDeleteComment}
           />
         ))}
       </div>
+
+      <Modal
+        isOpen={isModalOpen}
+        message={
+          "Are you sure you want to delete this comment? This will remove the coment and can't be undone"
+        }
+        title={"Delete Comment"}
+        onClose={closeModal}
+        onConfirm={() => onDeleteComment(comment.id)}
+      />
     </>
   )
 }

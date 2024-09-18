@@ -8,7 +8,11 @@ function AddCommentComponent({
   isUpdateTextArea = false,
 }) {
   return (
-    <div className="add-comment-section">
+    <div
+      className={`${
+        isUpdateTextArea ? "edit-comment-section" : "add-comment-section"
+      } `}
+    >
       {isUpdateTextArea ? (
         ""
       ) : (

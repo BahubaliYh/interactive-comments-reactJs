@@ -14,7 +14,7 @@ const useCommentTree = (initialComments) => {
       } else if (comment.replies && comment.replies.length > 0) {
         return {
           ...comment,
-          replies: editNode(comment.replies, commentId, content),
+          replies: insertNode(comment.replies, commentId, content),
         }
       }
 
@@ -51,7 +51,7 @@ const useCommentTree = (initialComments) => {
       } else if (comment.replies && comment.replies.length > 0) {
         return {
           ...comment,
-          replies: insertNode(comment.replies, commentId, content),
+          replies: editNode(comment.replies, commentId, content),
         }
       }
 
@@ -63,10 +63,27 @@ const useCommentTree = (initialComments) => {
     setComments((prevComments) => editNode(prevComments, commentId, content))
   }
 
+  const deleteNode = (tree, commentId) => {
+    return tree.reduce((acc, comment) => {
+      if (comment.id === commentId) {
+        return acc
+      } else if (comment.replies && comment.replies.length > 0) {
+        comment.replies = deleteNode(comment.replies, commentId)
+      }
+
+      return [...acc, comment]
+    }, [])
+  }
+
+  const deleteComment = (commentId) => {
+    setComments((prevComments) => deleteNode(prevComments, commentId))
+  }
+
   return {
     comments,
     insertComment,
     editComment,
+    deleteComment,
   }
 }
 

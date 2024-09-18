@@ -32,6 +32,19 @@ textarea {
   align-items: flex-start;
 }
 
+
+.edit-comment-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+.edit-comment-section div:nth-of-type(2) {
+  display: flex;
+  justify-content: end;
+}
+
 .comment-body {
   display: flex;
   flex-direction: column;
