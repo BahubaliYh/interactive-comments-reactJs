@@ -1,6 +1,6 @@
 {
   "name": "interactive-comments",
-  "private": true,
+  "private": false,
   "homepage": "https://bahubaliyh.github.io/interactive-comments-reactJs/",
   "version": "0.0.0",
   "type": "module",
