@@ -128,3 +128,39 @@ textarea {
 .comment-header-actions img {
   margin-right: 5px;
 }
+
+@media screen and (max-width: 600px) {
+  .container {
+    margin: 10px 10px;
+  }
+
+  .comment {
+    flex-direction: column;
+    padding: 20px;
+    gap: unset;
+  }
+
+  .add-comment-section {
+    flex-direction: column;
+    padding: 20px
+  }
+
+  .mobile-add-comment-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .replies-container {
+    padding-left: 10px;
+    margin-left: 0;
+  }
+}
+
+.mobile-comment-header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}

@@ -14,6 +14,7 @@ function App() {
     insertComment,
     editComment,
     deleteComment,
+    updateCommentScore,
   } = useCommentTree(comments)
   console.log("commentsData", commentsData)
 
@@ -50,6 +51,7 @@ function App() {
           handleChange={handleChange}
           onEditComment={handleEdit}
           onDeleteComment={handleDelete}
+          updateCommentScore={updateCommentScore}
         />
       ))}
       <AddCommentComponent

@@ -1,15 +1,19 @@
 import React, { useState } from "react"
 import "./styles/Score.css" // Make sure to create this CSS file
 
-function Score({ score }) {
+function Score({ score, onUpdateScore }) {
   const [votes, setScore] = useState(score) // Initial score set to 12
 
   const increaseScore = () => {
-    setScore(score + 1)
+    const newScore = votes + 1
+    setScore(newScore)
+    onUpdateScore(newScore)
   }
 
   const decreaseScore = () => {
-    setScore(score - 1)
+    const newScore = votes - 1
+    setScore(newScore)
+    onUpdateScore(newScore) // Update the parent data array
   }
 
   return (

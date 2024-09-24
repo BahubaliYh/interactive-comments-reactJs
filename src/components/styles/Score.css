@@ -8,7 +8,6 @@
   padding: 10px;
   width: 30px;
   height: 100px;
-
 }
 
 .score-button {
@@ -39,4 +38,19 @@
 .score-button:hover {
   color: hsl(238, 40%, 52%);
   opacity: 1;
+}
+
+
+@media screen and (max-width: 600px) {
+  .score-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    background-color: hsl(228, 33%, 97%);
+    border-radius: 12px;
+    padding: 10px;
+    width: 90px;
+    height: 20px;
+  }
 }

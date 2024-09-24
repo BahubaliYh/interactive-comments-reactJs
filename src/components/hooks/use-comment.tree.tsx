@@ -27,7 +27,7 @@ const useCommentTree = (initialComments) => {
       id: Date.now(),
       content,
       score: 0,
-      createdAt: new Date().toDateString(),
+      createdAt: new Date().toISOString(),
       replies: [],
     }
 
@@ -46,7 +46,7 @@ const useCommentTree = (initialComments) => {
         return {
           ...comment,
           content,
-          createdAt: new Date().toDateString(),
+          createdAt: new Date().toISOString(),
         }
       } else if (comment.replies && comment.replies.length > 0) {
         return {
@@ -79,11 +79,36 @@ const useCommentTree = (initialComments) => {
     setComments((prevComments) => deleteNode(prevComments, commentId))
   }
 
+  const updateScoreNode = (tree, commentId, newScore) => {
+    return tree.map((comment) => {
+      if (comment.id === commentId) {
+        return {
+          ...comment,
+          score: newScore,
+        }
+      } else if (comment.replies && comment.replies.length > 0) {
+        return {
+          ...comment,
+          replies: updateScoreNode(comment.replies, commentId, newScore),
+        }
+      }
+
+      return comment
+    })
+  }
+
+  const updateCommentScore = (commentId, newScore) => {
+    setComments((prevComments) =>
+      updateScoreNode(prevComments, commentId, newScore)
+    )
+  }
+
   return {
     comments,
     insertComment,
     editComment,
     deleteComment,
+    updateCommentScore,
   }
 }
 
